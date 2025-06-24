@@ -1,0 +1,31 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+on:
+  push:
+
+defaults:
+  run:
+    working-directory: ./
+
+jobs:
+  my-job:
+
+    runs-on: ubuntu-latest
+
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: v22.x
+        cache: 'npm'
+    - name: Get version
+      id: pkg_ver
+      with:
+        directory: ${{ github.workspace }}
+      uses: ./
+    - name: Output version
+      run: echo "Version ${{ steps.pkg_ver.outputs.version }}"

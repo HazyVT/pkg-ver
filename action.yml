@@ -1,0 +1,20 @@
+name: pkg-ver
+description: Get version tag of package json
+
+inputs:
+  file:
+    description: Name of file to check. Defauls to package.json.
+    required: true
+    default: package.json
+  directory:
+    description: Use github workspace tag here. defaults to pkg-ver directory
+    required: true
+    default: ./
+
+outputs:
+  version:
+    description: Version tag.
+
+runs:
+  using: node20
+  main: dist/index.js
